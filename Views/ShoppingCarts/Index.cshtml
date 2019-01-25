@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Data.ShoppingCart>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ShoppingCartProfit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShoppingCartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShoppingCartPaymentMethod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShoppingCartDeliverytMethod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShoppingCartClient)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShoppingCartProfit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShoppingCartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShoppingCartPaymentMethod)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShoppingCartDeliverytMethod)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShoppingCartClient)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ShoppingCartId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ShoppingCartId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ShoppingCartId })
+        </td>
+    </tr>
+}
+
+</table>

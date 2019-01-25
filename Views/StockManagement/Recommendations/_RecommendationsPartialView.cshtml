@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Data.StockManagement.Recommendation>
+
+<div class="card">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseRecommendation" aria-expanded="true" aria-controls="collapseRecommendation">
+                        Recomendaciones
+                    </a>
+                    <button type="button" class="btn btn-warning float-lg-right" data-toggle="modal" data-target=".CreateRecommendation">Agregar</button>
+                </h4>
+            </div>
+            <div id="collapseRecommendation" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                    <table class="table table-hover">
+                        @foreach (var item in Model.OrderBy(x => x.RecommendationDescription))
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RecommendationDescription)
+                                </td>
+                                <td class="text-right" style="padding-right: 20px;">
+                                    <i class="fas fa-pencil-alt" data-toggle="modal" data-target=".EditRecommendation" data-recommendation-id="@item.RecommendationnId"></i> |
+                                    <i class="fas fa-trash-alt" data-toggle="modal" data-target=".DeleteRecommendation" data-recommendation-id="@item.RecommendationnId"></i>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* MODAL CREAR *@
+<div class="modal fade CreateRecommendation" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            @Html.Partial("../StockManagement/Recommendations/_CreatePartialView", new Data.StockManagement.Recommendation())
+        </div>
+    </div>
+</div>
+
+@* MODAL EDITAR *@
+<div class="modal fade DeleteRecommendation" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            @Html.Partial("../StockManagement/Recommendations/_DeletePartialView", new Data.StockManagement.Recommendation())
+        </div>
+    </div>
+</div>
+
+@* MODAL BORRAR *@
+<div class="modal fade EditRecommendation" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            @Html.Partial("../StockManagement/Recommendations/_EditPartialView", new Data.StockManagement.Recommendation())
+        </div>
+    </div>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    function toggleIcon(e) {
+        $(e.target)
+        .prev('.panel-heading')
+        .find(".more-less")
+        .toggleClass('glyphicon-plus glyphicon-minus');
+    }
+
+    $(function () {
+        $('.panel-group').on('hidden.bs.collapse', toggleIcon);
+        $('.panel-group').on('shown.bs.collapse', toggleIcon);
+        $('i.fa-trash-alt').click(function () {
+            var RecommendationnId = $(this).data("recommendation-id");
+            var deleteRoute = $(".DeleteRecommendation .modal-dialog form").attr("action")
+            if (deleteRoute[deleteRoute.length - 1] == "/") {
+                $(".DeleteRecommendation .modal-dialog form").attr("action", deleteRoute + RecommendationnId);
+            }
+            else {
+                $(".DeleteRecommendation .modal-dialog form").attr("action", deleteRoute.substring(0, deleteRoute.lastIndexOf("/")) + "/" + RecommendationnId);
+            }
+        });
+
+        $('i.fa-pencil-alt').click(function () {
+
+            var RecommendationnId = $(this).data("recommendation-id");
+            var editRoute = $(".EditRecommendation .modal-dialog form").attr("action")
+            if (editRoute[editRoute.length - 1] == "/") {
+                $(".EditRecommendation .modal-dialog form").attr("action", editRoute + RecommendationnId);
+            }
+            else {
+                $(".EditRecommendation .modal-dialog form").attr("action", editRoute.substring(0, editRoute.lastIndexOf("/")) + "/" + RecommendationnId);
+            }
+
+            var RecommendationDescription = $(this).parent().prev().text().trim();
+            $("#Recommendation-editor").val(RecommendationDescription);
+            $("#RecommendationnId").val(RecommendationId);
+        });
+    });
+</script>

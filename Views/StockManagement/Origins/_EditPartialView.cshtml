@@ -1,0 +1,27 @@
+﻿@model Data.StockManagement.Origin
+
+
+<h3>Editar origen</h3>
+
+@using (Html.BeginForm("Edit", "Origins", new { @id = '/' }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.OriginId)
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OriginDescription, new { htmlAttributes = new { @class = "form-control", @id = "origin-editor" } })
+                @Html.ValidationMessageFor(model => model.OriginDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+            <div class="form-group text-lg-right">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Editar" class="btn pull-right btn-warning" />
+                </div>
+            </div>
+    </div>
+}

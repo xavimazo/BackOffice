@@ -1,0 +1,45 @@
+﻿@model BackOffice.Models.StockManagementViewModel
+@{
+    ViewBag.Title = "StockManagement";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card">
+    <div class="card-body">
+        <h2>Administración de productos</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-2">
+        @Html.Partial("../StockManagement/Colors/_ColorsPartialView", Model.Colors)
+    </div>
+    <div class="col-sm-2">
+        @Html.Partial("../StockManagement/Capacities/_CapacitiesPartialView", Model.Capacities)
+    </div>
+    <div class="col-sm-2">
+        @Html.Partial("../StockManagement/Parts/_PartsPartialView", Model.Parts)
+    </div>
+    <div class="col-sm-2">
+        @Html.Partial("../StockManagement/Origins/_OriginsPartialView", Model.Origins)
+    </div>
+    <div class="col-sm-2">
+        @Html.Partial("../StockManagement/Categories/_CategoriesPartialView", Model.Categories)
+    </div>
+    <div class="col-sm-2">
+        @Html.Partial("../StockManagement/Lines/_LinesPartialView", Model.Lines)
+    </div>
+</div>
+
+
+<div style="margin-top: 15px;">
+    @Html.Partial("../StockManagement/ShortDescriptions/_ShortDescriptionsPartialView", Model.ShortDescriptions)
+</div>
+<div style="margin-top: 15px;">
+    @Html.Partial("../StockManagement/FullDescriptions/_FullDescriptionsPartialView", Model.FullDescriptions)
+</div>
+<div style="margin-top: 15px;">
+    @Html.Partial("../StockManagement/Observations/_ObservationsPartialView", Model.Observations)
+</div>
+<div style="margin-top: 15px;">
+    @Html.Partial("../StockManagement/Recommendations/_RecommendationsPartialView", Model.Recommendations)
+</div>

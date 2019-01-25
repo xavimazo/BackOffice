@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Data.StockManagement.Capacity>
+
+<div class="card">
+    <div class="card-header-management">
+        Capacidades<button type="button" class="btn btn-warning float-lg-right" data-toggle="modal" data-target=".CreateCapacity"><i class="fas fa-plus"></i></button>
+    </div>
+    <ul class="list-group list-group-flush pre-scrollable">
+        @foreach (var item in Model.OrderBy(x => x.CapacityDescription))
+        {
+            <li class="list-group-item">
+                <div class="d-inline-block">@Html.DisplayFor(modelItem => item.CapacityDescription)</div>
+                <div class="float-right d-inline-block">
+                    <i class="fas fa-pencil-alt" data-toggle="modal" data-target=".EditCapacity" data-description-id="@item.CapacityId"></i> |
+                    <i class="fas fa-trash-alt" data-toggle="modal" data-target=".DeleteCapacity" data-description-id="@item.CapacityId"></i>
+                </div>
+            </li>
+        }
+    </ul>
+</div>
+
+@* MODAL CREAR *@
+<div class="modal fade CreateCapacity" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            @Html.Partial("../StockManagement/Capacities/_CreatePartialView", new Data.StockManagement.Capacity())
+        </div>
+    </div>
+</div>
+
+@* MODAL EDITAR *@
+<div class="modal fade EditCapacity" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            @Html.Partial("../StockManagement/Capacities/_EditPartialView", new Data.StockManagement.Capacity())
+        </div>
+    </div>
+</div>
+
+@* MODAL BORRAR *@
+<div class="modal fade DeleteCapacity" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            @Html.Partial("../StockManagement/Capacities/_DeletePartialView", new Data.StockManagement.Capacity())
+        </div>
+    </div>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    function toggleIcon(e) {
+        $(e.target)
+        .prev('.panel-heading')
+        .find(".more-less")
+        .toggleClass('glyphicon-plus glyphicon-minus');
+    }
+
+    $(function () {
+        $('.panel-group').on('hidden.bs.collapse', toggleIcon);
+        $('.panel-group').on('shown.bs.collapse', toggleIcon);
+        $('i.fa-trash-alt').click(function () {
+            var CapacityId = $(this).data("description-id");
+            var deleteRoute = $(".DeleteCapacity .modal-dialog form").attr("action")
+            if (deleteRoute[deleteRoute.length - 1] == "/") {
+                $(".DeleteCapacity .modal-dialog form").attr("action", deleteRoute + CapacityId);
+            }
+            else {
+                $(".DeleteCapacity .modal-dialog form").attr("action", deleteRoute.substring(0, deleteRoute.lastIndexOf("/")) + "/" + CapacityId);
+            }
+        });
+
+        $('i.fa-pencil-alt').click(function () {
+
+            var CapacityId = $(this).data("description-id");
+            var editRoute = $(".EditCapacity .modal-dialog form").attr("action")
+            if (editRoute[editRoute.length - 1] == "/") {
+                $(".EditCapacity .modal-dialog form").attr("action", editRoute + CapacityId);
+            }
+            else {
+                $(".EditCapacity .modal-dialog form").attr("action", editRoute.substring(0, editRoute.lastIndexOf("/")) + "/" + CapacityId);
+            }
+
+            var CapacityDescription = $(this).parent().prev().text().trim();
+            $("#capacity-editor").val(CapacityDescription);
+            $("#CapacityId").val(CapacityId);
+        });
+    });
+</script>

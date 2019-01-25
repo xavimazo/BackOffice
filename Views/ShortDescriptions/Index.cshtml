@@ -1,0 +1,108 @@
+﻿@model IEnumerable<Data.StockManagement.ShortDescription>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Descripciones cortas
+                    </a>
+                        <button type="button" class="btn btn-warning float-lg-right" data-toggle="modal" data-target=".Create">Agregar</button>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ShortTextDescription)
+                                    </td>
+                                    <td class="text-right" style="padding-right: 20px;">
+                                        <i class="fas fa-pencil-alt" data-toggle="modal" data-target=".Edit" data-description-id="@item.ShortDescriptionId"></i> |
+                                        <i class="fas fa-trash-alt" data-toggle="modal" data-target=".Delete" data-description-id="@item.ShortDescriptionId"></i>
+                                    </td>
+                                </tr>
+                            }
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* MODAL CREAR *@
+<div class="modal fade Create" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            @Html.Partial("_CreatePartialView", new Data.StockManagement.ShortDescription())
+        </div>
+    </div>
+</div>
+
+@* MODAL EDITAR *@
+<div class="modal fade Edit" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            @Html.Partial("_EditPartialView", new Data.StockManagement.ShortDescription())
+        </div>
+    </div>
+</div>
+
+@* MODAL BORRAR *@
+<div class="modal fade Delete" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            @Html.Partial("_DeletePartialView", new Data.StockManagement.ShortDescription())
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    function toggleIcon(e) {
+        $(e.target)
+            .prev('.panel-heading')
+            .find(".more-less")
+            .toggleClass('glyphicon-plus glyphicon-minus');
+    }
+
+    $(function () {
+        $('.panel-group').on('hidden.bs.collapse', toggleIcon);
+        $('.panel-group').on('shown.bs.collapse', toggleIcon);
+        $('i.fa-trash-alt').click(function () {
+            var descriptionId = $(this).data("description-id");
+            var deleteRoute = $(".Delete .modal-dialog form").attr("action")
+            if(deleteRoute[deleteRoute.length - 1] == "/") {
+             $(".Delete .modal-dialog form").attr("action", deleteRoute + descriptionId);
+            }
+            else {
+             $(".Delete .modal-dialog form").attr("action", deleteRoute.substring(0, deleteRoute.lastIndexOf("/")) + "/" + descriptionId);
+            }
+        });
+
+        $('i.fa-pencil-alt').click(function () {
+               
+                var descriptionId = $(this).data("description-id");
+                var editRoute = $(".Edit .modal-dialog form").attr("action")
+                if(editRoute[editRoute.length - 1] == "/") {
+                 $(".Edit .modal-dialog form").attr("action", editRoute + descriptionId);
+                }
+                else {
+                 $(".Edit .modal-dialog form").attr("action", editRoute.substring(0, editRoute.lastIndexOf("/")) + "/" + descriptionId);
+                }
+
+                var description = $(this).parent().prev().text().trim();
+                $("#description-editor").val(description);
+                $("#ShortDescriptionId").val(descriptionId);
+        });
+    });
+}
+
+

@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Data.StockManagement.Color>
+
+<div class="card">
+    <div class="card-header-management">
+        Colores<button type="button" class="btn btn-warning float-lg-right" data-toggle="modal" data-target=".CreateColor"><i class="fas fa-plus"></i></button>
+    </div>
+    <ul class="list-group list-group-flush pre-scrollable">
+        @foreach (var item in Model.OrderBy(x => x.ColorDescription))
+        {
+            <li class="list-group-item">
+                <div class="d-inline-block">@Html.DisplayFor(modelItem => item.ColorDescription)</div>
+                <div class="float-right d-inline-block">
+                    <i class="fas fa-pencil-alt" data-toggle="modal" data-target=".EditColor" data-description-id="@item.ColorId"></i> |
+                    <i class="fas fa-trash-alt" data-toggle="modal" data-target=".DeleteColor" data-description-id="@item.ColorId"></i>
+                </div>
+            </li>
+        }
+    </ul>
+</div>
+
+@* MODAL CREAR *@
+<div class="modal fade CreateColor" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            @Html.Partial("../StockManagement/Colors/_CreatePartialView", new Data.StockManagement.Color())
+        </div>
+    </div>
+</div>
+
+@* MODAL EDITAR *@
+<div class="modal fade EditColor" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            @Html.Partial("../StockManagement/Colors/_EditPartialView", new Data.StockManagement.Color())
+        </div>
+    </div>
+</div>
+
+@* MODAL BORRAR *@
+<div class="modal fade DeleteColor" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            @Html.Partial("../StockManagement/Colors/_DeletePartialView", new Data.StockManagement.Color())
+        </div>
+    </div>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    function toggleIcon(e) {
+        $(e.target)
+        .prev('.panel-heading')
+        .find(".more-less")
+        .toggleClass('glyphicon-plus glyphicon-minus');
+    }
+
+    $(function () {
+        $('.panel-group').on('hidden.bs.collapse', toggleIcon);
+        $('.panel-group').on('shown.bs.collapse', toggleIcon);
+        $('i.fa-trash-alt').click(function () {
+            var ColorId = $(this).data("description-id");
+            var deleteRoute = $(".DeleteColor .modal-dialog form").attr("action")
+            if (deleteRoute[deleteRoute.length - 1] == "/") {
+                $(".DeleteColor .modal-dialog form").attr("action", deleteRoute + ColorId);
+            }
+            else {
+                $(".DeleteColor .modal-dialog form").attr("action", deleteRoute.substring(0, deleteRoute.lastIndexOf("/")) + "/" + ColorId);
+            }
+        });
+
+        $('i.fa-pencil-alt').click(function () {
+
+            var ColorId = $(this).data("description-id");
+            var editRoute = $(".EditColor .modal-dialog form").attr("action")
+            if (editRoute[editRoute.length - 1] == "/") {
+                $(".EditColor .modal-dialog form").attr("action", editRoute + ColorId);
+            }
+            else {
+                $(".EditColor .modal-dialog form").attr("action", editRoute.substring(0, editRoute.lastIndexOf("/")) + "/" + ColorId);
+            }
+
+            var ColorDescription = $(this).parent().prev().text().trim();
+            $("#description-editor").val(ColorDescription);
+            $("#ColorId").val(ColorId);
+        });
+    });
+</script>

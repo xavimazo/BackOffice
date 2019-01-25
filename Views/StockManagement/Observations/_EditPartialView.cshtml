@@ -1,0 +1,27 @@
+﻿@model Data.StockManagement.Observation
+
+
+<h3>Editar observaciones</h3>
+
+@using (Html.BeginForm("Edit", "Observations", new { @id = '/' }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ObservationId)
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ObservationDescription, new { htmlAttributes = new { @class = "form-control", @id = "observation-editor" } })
+                @Html.ValidationMessageFor(model => model.ObservationDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+            <div class="form-group text-lg-right">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Editar" class="btn pull-right btn-warning" />
+                </div>
+            </div>
+    </div>
+}

@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Data.StockManagement.Line>
+
+<div class="card">
+    <div class="card-header-management">
+        Lineas<button type="button" class="btn btn-warning float-lg-right" data-toggle="modal" data-target=".CreateLine"><i class="fas fa-plus"></i></button>
+    </div>
+    <ul class="list-group list-group-flush pre-scrollable">
+        @foreach (var item in Model.OrderBy(x => x.LineDescription))
+        {
+            <li class="list-group-item">
+                <div class="d-inline-block">@Html.DisplayFor(modelItem => item.LineDescription)</div>
+                <div class="float-right d-inline-block">
+                    <i class="fas fa-pencil-alt" data-toggle="modal" data-target=".EditLine" data-description-id="@item.LineId"></i> |
+                    <i class="fas fa-trash-alt" data-toggle="modal" data-target=".DeleteLine" data-description-id="@item.LineId"></i>
+                </div>
+            </li>
+        }
+    </ul>
+</div>
+
+@* MODAL CREAR *@
+<div class="modal fade CreateLine" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            @Html.Partial("../StockManagement/Lines/_CreatePartialView", new Data.StockManagement.Line())
+        </div>
+    </div>
+</div>
+
+@* MODAL EDITAR *@
+<div class="modal fade EditLine" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            @Html.Partial("../StockManagement/Lines/_EditPartialView", new Data.StockManagement.Line())
+        </div>
+    </div>
+</div>
+
+@* MODAL BORRAR *@
+<div class="modal fade DeleteLine" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            @Html.Partial("../StockManagement/Lines/_DeletePartialView", new Data.StockManagement.Line())
+        </div>
+    </div>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    function toggleIcon(e) {
+        $(e.target)
+        .prev('.panel-heading')
+        .find(".more-less")
+        .toggleClass('glyphicon-plus glyphicon-minus');
+    }
+
+    $(function () {
+        $('.panel-group').on('hidden.bs.collapse', toggleIcon);
+        $('.panel-group').on('shown.bs.collapse', toggleIcon);
+        $('i.fa-trash-alt').click(function () {
+            var LineId = $(this).data("description-id");
+            var deleteRoute = $(".DeleteLine .modal-dialog form").attr("action")
+            if (deleteRoute[deleteRoute.length - 1] == "/") {
+                $(".DeleteLine .modal-dialog form").attr("action", deleteRoute + LineId);
+            }
+            else {
+                $(".DeleteLine .modal-dialog form").attr("action", deleteRoute.substring(0, deleteRoute.lastIndexOf("/")) + "/" + LineId);
+            }
+        });
+
+        $('i.fa-pencil-alt').click(function () {
+
+            var LineId = $(this).data("description-id");
+            var editRoute = $(".EditLine .modal-dialog form").attr("action")
+            if (editRoute[editRoute.length - 1] == "/") {
+                $(".EditLine .modal-dialog form").attr("action", editRoute + LineId);
+            }
+            else {
+                $(".EditLine .modal-dialog form").attr("action", editRoute.substring(0, editRoute.lastIndexOf("/")) + "/" + LineId);
+            }
+
+            var ColorDescription = $(this).parent().prev().text().trim();
+            $("#line-editor").val(ColorDescription);
+            $("#LineId").val(LineId);
+        });
+    });
+</script>

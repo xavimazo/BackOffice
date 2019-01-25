@@ -1,0 +1,59 @@
+﻿@model Data.ShoppingCart
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ShoppingCart</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ShoppingCartProfit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShoppingCartProfit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShoppingCartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShoppingCartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShoppingCartPaymentMethod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShoppingCartPaymentMethod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShoppingCartDeliverytMethod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShoppingCartDeliverytMethod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShoppingCartClient)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShoppingCartClient)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ShoppingCartId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,25 @@
+﻿@model BackOffice.Models.ProductsViewModel
+
+    @{
+        ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <div class="card">
+        <h2>Productos<a  class="btn btn-warning float-lg-right" href="/Products/Create">Agregar</a></h2>
+
+    </div>
+    <div class="row" style="margin:0px">
+        @foreach (var item in Model.Products)
+        {
+            <div class="col-sm-4" role="button" ><a href="/Products/Edit/@item.ProductId">
+                <div class="card" >
+                    <div>
+                        <img class="d-inline-block" src="@Html.DisplayFor(modelItem => item.ProductMainIcon)" width="110" height="110" />
+                        <div class="d-inline-block product-Title">@Html.DisplayFor(modelItem => item.ProductName)<div class="d-inline-block product-Capacity">@Html.DisplayFor(modelItem => item.Capacity)</div></div>
+                    </div>
+                </div></a>
+            </div>
+        }
+    </div>
+

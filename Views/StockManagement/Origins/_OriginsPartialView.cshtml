@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Data.StockManagement.Origin>
+
+<div class="card">
+    <div class="card-header-management">
+        Origenes<button type="button" class="btn btn-warning float-lg-right" data-toggle="modal" data-target=".CreateOrigin"><i class="fas fa-plus"></i></button>
+    </div>
+    <ul class="list-group list-group-flush pre-scrollable">
+        @foreach (var item in Model.OrderBy(x => x.OriginDescription))
+        {
+            <li class="list-group-item">
+                <div class="d-inline-block">@Html.DisplayFor(modelItem => item.OriginDescription)</div>
+                <div class="float-right d-inline-block">
+                    <i class="fas fa-pencil-alt" data-toggle="modal" data-target=".EditOrigin" data-description-id="@item.OriginId"></i> |
+                    <i class="fas fa-trash-alt" data-toggle="modal" data-target=".DeleteOrigin" data-description-id="@item.OriginId"></i>
+                </div>
+            </li>
+        }
+    </ul>
+</div>
+
+@* MODAL CREAR *@
+<div class="modal fade CreateOrigin" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            @Html.Partial("../StockManagement/Origins/_CreatePartialView", new Data.StockManagement.Origin())
+        </div>
+    </div>
+</div>
+
+@* MODAL EDITAR *@
+<div class="modal fade EditOrigin" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            @Html.Partial("../StockManagement/Origins/_EditPartialView", new Data.StockManagement.Origin())
+        </div>
+    </div>
+</div>
+
+@* MODAL BORRAR *@
+<div class="modal fade DeleteOrigin" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            @Html.Partial("../StockManagement/Origins/_DeletePartialView", new Data.StockManagement.Origin())
+        </div>
+    </div>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    function toggleIcon(e) {
+        $(e.target)
+        .prev('.panel-heading')
+        .find(".more-less")
+        .toggleClass('glyphicon-plus glyphicon-minus');
+    }
+
+    $(function () {
+        $('.panel-group').on('hidden.bs.collapse', toggleIcon);
+        $('.panel-group').on('shown.bs.collapse', toggleIcon);
+        $('i.fa-trash-alt').click(function () {
+            var OriginId = $(this).data("description-id");
+            var deleteRoute = $(".DeleteOrigin .modal-dialog form").attr("action")
+            if (deleteRoute[deleteRoute.length - 1] == "/") {
+                $(".DeleteOrigin .modal-dialog form").attr("action", deleteRoute + OriginId);
+            }
+            else {
+                $(".DeleteOrigin .modal-dialog form").attr("action", deleteRoute.substring(0, deleteRoute.lastIndexOf("/")) + "/" + OriginId);
+            }
+        });
+
+        $('i.fa-pencil-alt').click(function () {
+
+            var OriginId = $(this).data("description-id");
+            var editRoute = $(".EditOrigin .modal-dialog form").attr("action")
+            if (editRoute[editRoute.length - 1] == "/") {
+                $(".EditOrigin .modal-dialog form").attr("action", editRoute + OriginId);
+            }
+            else {
+                $(".EditOrigin .modal-dialog form").attr("action", editRoute.substring(0, editRoute.lastIndexOf("/")) + "/" + OriginId);
+            }
+
+            var OriginDescription = $(this).parent().prev().text().trim();
+            $("#origin-editor").val(OriginDescription);
+            $("#OriginId").val(OriginId);
+        });
+    });
+</script>

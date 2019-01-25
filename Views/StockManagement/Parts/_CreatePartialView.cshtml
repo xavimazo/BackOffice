@@ -1,0 +1,25 @@
+﻿@model Data.StockManagement.Part
+
+<h3>Crear pieza</h3>
+
+@using (Html.BeginForm("Create", "Parts"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PartDescription, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PartDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group text-lg-right">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar" class="btn pull-right btn-warning" />
+            </div>
+        </div>
+    </div>
+}

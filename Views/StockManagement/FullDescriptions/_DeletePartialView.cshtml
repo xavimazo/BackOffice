@@ -1,0 +1,16 @@
+﻿
+@model Data.StockManagement.FullDescription
+
+<div class="form-horizontal text-center">
+    <h3>¿Queres borrar la descripcion corta?</h3>
+
+    @using (Html.BeginForm("Delete", "FullDescriptions", new { @id = '/' }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <div class="form-actions no-color text-center">
+                <input type="submit" value="Borrar" class="btn pull-right btn-warning" />
+            </div>
+        </div>
+    }
+</div>

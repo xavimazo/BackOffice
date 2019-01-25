@@ -1,0 +1,83 @@
+﻿@model Data.StockManagement.Product
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductHeight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductHeight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductWidth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductWidth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductDeep)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductDeep)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductDiameter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductDiameter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductWeight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductWeight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductMicrowave)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductMicrowave)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductMainIcon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductMainIcon)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProductId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,102 @@
+﻿@model IEnumerable<Data.StockManagement.FullDescription>
+
+<div class="card">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFullDescription" aria-expanded="true" aria-controls="collapseFullDescription">
+                        Descripciones completas
+                    </a>
+                    <button type="button" class="btn btn-warning float-lg-right" data-toggle="modal" data-target=".CreateFullDescription">Agregar</button>
+                </h4>
+            </div>
+            <div id="collapseFullDescription" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                    <table class="table table-hover">
+                        @foreach (var item in Model.OrderBy(x => x.FullTextDescription))
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FullTextDescription)
+                                </td>
+                                <td class="text-right" style="padding-right: 20px;">
+                                    <i class="fas fa-pencil-alt" data-toggle="modal" data-target=".EditFullDescription" data-description-id="@item.FullDescriptionId"></i> |
+                                    <i class="fas fa-trash-alt" data-toggle="modal" data-target=".DeleteFullDescription" data-description-id="@item.FullDescriptionId"></i>
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* MODAL CREAR *@
+<div class="modal fade CreateFullDescription" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            @Html.Partial("../StockManagement/FullDescriptions/_CreatePartialView", new Data.StockManagement.FullDescription())
+        </div>
+    </div>
+</div>
+
+@* MODAL EDITAR *@
+<div class="modal fade EditFullDescription" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            @Html.Partial("../StockManagement/FullDescriptions/_EditPartialView", new Data.StockManagement.FullDescription())
+        </div>
+    </div>
+</div>
+
+@* MODAL BORRAR *@
+<div class="modal fade DeleteFullDescription" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            @Html.Partial("../StockManagement/FullDescriptions/_DeletePartialView", new Data.StockManagement.FullDescription())
+        </div>
+    </div>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    function toggleIcon(e) {
+        $(e.target)
+        .prev('.panel-heading')
+        .find(".more-less")
+        .toggleClass('glyphicon-plus glyphicon-minus');
+    }
+
+    $(function () {
+        $('.panel-group').on('hidden.bs.collapse', toggleIcon);
+        $('.panel-group').on('shown.bs.collapse', toggleIcon);
+        $('i.fa-trash-alt').click(function () {
+            var descriptionId = $(this).data("description-id");
+            var deleteRoute = $(".DeleteFullDescription .modal-dialog form").attr("action")
+            if (deleteRoute[deleteRoute.length - 1] == "/") {
+                $(".DeleteFullDescription .modal-dialog form").attr("action", deleteRoute + descriptionId);
+            }
+            else {
+                $(".DeleteFullDescription .modal-dialog form").attr("action", deleteRoute.substring(0, deleteRoute.lastIndexOf("/")) + "/" + descriptionId);
+            }
+        });
+
+        $('i.fa-pencil-alt').click(function () {
+
+            var descriptionId = $(this).data("description-id");
+            var editRoute = $(".EditFullDescription .modal-dialog form").attr("action")
+            if (editRoute[editRoute.length - 1] == "/") {
+                $(".EditFullDescription .modal-dialog form").attr("action", editRoute + descriptionId);
+            }
+            else {
+                $(".EditFullDescription .modal-dialog form").attr("action", editRoute.substring(0, editRoute.lastIndexOf("/")) + "/" + descriptionId);
+            }
+
+            var description = $(this).parent().prev().text().trim();
+            $("#Fulldescription-editor").val(description);
+            $("#FullDescriptionId").val(descriptionId);
+        });
+    });
+</script>
