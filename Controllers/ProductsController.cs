@@ -78,14 +78,15 @@ namespace BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductId,ProductName,ProductHeight,ProductWidth,ProductDeep,ProductDiameter,ProductWeight,ProductOrigin,ProductMicrowave,ProductMainIcon,OriginId")] Product product)
+        public ActionResult Create([Bind(
+        Include = "ProductId,ProductName,ProductHeight,ProductWidth,ProductDeep,ProductDiameter,ProductWeight,ProductOrigin,ProductMicrowave,ProductMainIcon,OriginId,CapacityId,CategorieId,LineId")] Product product)
         {
             if (ModelState.IsValid)
             {
                 db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
+            }//change
 
             return View(product);
         }
@@ -125,7 +126,8 @@ namespace BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductId,ProductName,ProductHeight,ProductWidth,ProductDeep,ProductDiameter,ProductWeight,ProductOrigin,ProductMicrowave,ProductMainIcon,OriginId")] Product product)
+        public ActionResult Edit([Bind(
+        Include = "ProductId,ProductName,ProductHeight,ProductWidth,ProductDeep,ProductDiameter,ProductWeight,ProductOrigin,ProductMicrowave,ProductMainIcon,OriginId,CapacityId,CategorieId,LineId")] Product product)
         {
             if (ModelState.IsValid)
             {

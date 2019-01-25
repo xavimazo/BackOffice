@@ -91,6 +91,30 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.Product.Capacity, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(x => x.Product.CapacityId, Model.Capacities.Select(p => new SelectListItem { Value = p.CapacityId.ToString(), Text = p.CapacityDescription, Selected = p.CapacityId == Model.Product.CapacityId }), new { @class = "btn btn-secondary dropdown-toggle" })
+                @Html.ValidationMessageFor(model => model.Product.Capacity, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Product.CategorieId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(x => x.Product.CategorieId, Model.Categories.Select(p => new SelectListItem { Value = p.CategoryId.ToString(), Text = p.CategoryDescription, Selected = p.CategoryId == Model.Product.CategorieId }), new { @class = "btn btn-secondary dropdown-toggle" })
+                @Html.ValidationMessageFor(model => model.Product.Category, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Product.LineId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(x => x.Product.LineId, Model.Lines.Select(p => new SelectListItem { Value = p.LineId.ToString(), Text = p.LineDescription, Selected = p.LineId == Model.Product.LineId }), new { @class = "btn btn-secondary dropdown-toggle" })
+                @Html.ValidationMessageFor(model => model.Product.Line, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>

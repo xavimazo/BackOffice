@@ -12,7 +12,6 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Product</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -84,8 +83,32 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Product.Origin, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(x => x.Product.OriginId, Model.Origins.Select(p => new SelectListItem { Value = p.OriginId.ToString(), Text = p.OriginDescription }), new { @class = "browser-default" })
+                @Html.DropDownListFor(x => x.Product.OriginId, Model.Origins.Select(p => new SelectListItem { Value = p.OriginId.ToString(), Text = p.OriginDescription }), new { @class = "btn btn-secondary dropdown-toggle" })
                 @Html.ValidationMessageFor(model => model.Product.Origin, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Product.Capacity, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(x => x.Product.CapacityId, Model.Capacities.Select(p => new SelectListItem { Value = p.CapacityId.ToString(), Text = p.CapacityDescription }), new { @class = "btn btn-secondary dropdown-toggle" })
+                @Html.ValidationMessageFor(model => model.Product.Capacity, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Product.CategorieId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(x => x.Product.CategorieId, Model.Categories.Select(p => new SelectListItem { Value = p.CategoryId.ToString(), Text = p.CategoryDescription }), new { @class = "btn btn-secondary dropdown-toggle" })
+                @Html.ValidationMessageFor(model => model.Product.CategorieId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Product.LineId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(x => x.Product.LineId, Model.Lines.Select(p => new SelectListItem { Value = p.LineId.ToString(), Text = p.LineDescription }), new { @class = "btn btn-secondary dropdown-toggle" })
+                @Html.ValidationMessageFor(model => model.Product.LineId, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -97,18 +120,13 @@
     </div>
 }
 
-Capacity UNO A MUCHOS
-<br />
-Categorie UNO A MUCHOS<br />
-Color MUCHOS A MUCHOS<br />
-FullDescription MUCHOS A MUCHOS<br />
-Lines UNO A MUCHOS<br />
-Observations MUCHOS A MUCHOS<br />
-Origins UNO A MUCHOS<br />
-Parts MUCHOS A MUCHOS<br />
-Recommendations MUCHOS A MUCHOS<br />
-ShortDescriptions UNO A MUCHOS<br />
+ShortDescriptions UNO A MUCHOS<br /> colapsable
+FullDescription MUCHOS A MUCHOS<br /> colapsable
+Observations MUCHOS A MUCHOS<br /> colapsable
+Recommendations MUCHOS A MUCHOS<br /> colapsable
 
+Color MUCHOS A MUCHOS<br /> dropdown con checkbox
+Parts MUCHOS A MUCHOS<br /> dropdown con checkbox
 
 <div>
     @Html.ActionLink("Back to List", "Index")
