@@ -60,7 +60,7 @@ a[data-toggle="collapse"] {
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 12pt;
     background: #f0f0f0;
     padding-top: 0px;
@@ -68,7 +68,7 @@ body {
 }
 
 p {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;

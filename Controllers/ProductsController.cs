@@ -126,8 +126,7 @@ namespace BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(
-        Include = "ProductId,ProductName,ProductHeight,ProductWidth,ProductDeep,ProductDiameter,ProductWeight,ProductOrigin,ProductMicrowave,ProductMainIcon,OriginId,CapacityId,CategorieId,LineId")] Product product)
+        public ActionResult Edit([Bind(Include = "ProductId,ProductName,ProductHeight,ProductWidth,ProductDeep,ProductDiameter,ProductWeight,ProductOrigin,ProductMicrowave,ProductMainIcon,OriginId,CapacityId,CategorieId,LineId")] Product product)
         {
             if (ModelState.IsValid)
             {
