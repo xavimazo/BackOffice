@@ -15,307 +15,295 @@
 
     <div class="row">
         <div class="col-7">
-            <form>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        @Html.LabelFor(model => model.Product.ProductName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(model => model.Product.ProductName, htmlAttributes: new { @class = "control-label col-md-2" })
 
-                        @Html.EditorFor(model => model.Product.ProductName, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Product.ProductName, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Product.ProductName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Product.ProductName, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-2">
+                    @Html.LabelFor(model => model.Product.Capacity, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div>
+                        @Html.DropDownListFor(x => x.Product.CapacityId, Model.Capacities.Select(p => new SelectListItem { Value = p.CapacityId.ToString(), Text = p.CapacityDescription }), new { @class = "btn btn-secondary dropdown-toggle" })
+                        @Html.ValidationMessageFor(model => model.Product.Capacity, "", new { @class = "text-danger" })
                     </div>
-                    <div class="form-group col-md-2">
-                        @Html.LabelFor(model => model.Product.Capacity, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div>
-                            @Html.DropDownListFor(x => x.Product.CapacityId, Model.Capacities.Select(p => new SelectListItem { Value = p.CapacityId.ToString(), Text = p.CapacityDescription }), new { @class = "btn btn-secondary dropdown-toggle" })
-                            @Html.ValidationMessageFor(model => model.Product.Capacity, "", new { @class = "text-danger" })
-                        </div>
+                </div>
+                <div class="form-group col-md-2">
+                    @Html.LabelFor(model => model.Product.Origin, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div>
+                        @Html.DropDownListFor(x => x.Product.OriginId, Model.Origins.Select(p => new SelectListItem { Value = p.OriginId.ToString(), Text = p.OriginDescription }), new { @class = "btn btn-secondary dropdown-toggle" })
+                        @Html.ValidationMessageFor(model => model.Product.Origin, "", new { @class = "text-danger" })
                     </div>
-                    <div class="form-group col-md-2">
-                        @Html.LabelFor(model => model.Product.Origin, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div>
-                            @Html.DropDownListFor(x => x.Product.OriginId, Model.Origins.Select(p => new SelectListItem { Value = p.OriginId.ToString(), Text = p.OriginDescription }), new { @class = "btn btn-secondary dropdown-toggle" })
-                            @Html.ValidationMessageFor(model => model.Product.Origin, "", new { @class = "text-danger" })
-                        </div>
+                </div>
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(model => model.Product.Category, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div>
+                        @Html.DropDownListFor(x => x.Product.CategorieId, Model.Categories.Select(p => new SelectListItem { Value = p.CategoryId.ToString(), Text = p.CategoryDescription }), new { @class = "btn btn-secondary dropdown-toggle" })
+                        @Html.ValidationMessageFor(model => model.Product.CategorieId, "", new { @class = "text-danger" })
                     </div>
-                    <div class="form-group col-md-4">
-                        @Html.LabelFor(model => model.Product.Category, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div>
-                            @Html.DropDownListFor(x => x.Product.CategorieId, Model.Categories.Select(p => new SelectListItem { Value = p.CategoryId.ToString(), Text = p.CategoryDescription }), new { @class = "btn btn-secondary dropdown-toggle" })
-                            @Html.ValidationMessageFor(model => model.Product.CategorieId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    @Html.LabelFor(model => model.Product.ProductHeight, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div>
+                        @Html.EditorFor(model => model.Product.ProductHeight, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Product.ProductHeight, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    @Html.LabelFor(model => model.Product.ProductWidth, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div>
+                        @Html.EditorFor(model => model.Product.ProductWidth, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Product.ProductWidth, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    @Html.LabelFor(model => model.Product.ProductDeep, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div>
+                        @Html.EditorFor(model => model.Product.ProductDeep, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Product.ProductDeep, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    @Html.LabelFor(model => model.Product.ProductDiameter, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div>
+                        @Html.EditorFor(model => model.Product.ProductDiameter, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Product.ProductDiameter, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    @Html.LabelFor(model => model.Product.ProductWeight, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div>
+                        @Html.EditorFor(model => model.Product.ProductWeight, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Product.ProductWeight, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    @Html.LabelFor(model => model.Product.Line, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div>
+                        @Html.DropDownListFor(x => x.Product.LineId, Model.Lines.Select(p => new SelectListItem { Value = p.LineId.ToString(), Text = p.LineDescription }), new { @class = "btn btn-secondary dropdown-toggle" })
+                        @Html.ValidationMessageFor(model => model.Product.LineId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-10">
+                    @Html.LabelFor(model => model.Product.ProductMainIcon, htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div>
+                        @Html.EditorFor(model => model.Product.ProductMainIcon, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Product.ProductMainIcon, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    @Html.LabelFor(model => model.Product.ProductMicrowave, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div>
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.Product.ProductMicrowave)
+                            @Html.ValidationMessageFor(model => model.Product.ProductMicrowave, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group col-md-2">
-                        @Html.LabelFor(model => model.Product.ProductHeight, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div>
-                            @Html.EditorFor(model => model.Product.ProductHeight, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Product.ProductHeight, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group col-md-2">
-                        @Html.LabelFor(model => model.Product.ProductWidth, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div>
-                            @Html.EditorFor(model => model.Product.ProductWidth, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Product.ProductWidth, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group col-md-2">
-                        @Html.LabelFor(model => model.Product.ProductDeep, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div>
-                            @Html.EditorFor(model => model.Product.ProductDeep, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Product.ProductDeep, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group col-md-2">
-                        @Html.LabelFor(model => model.Product.ProductDiameter, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div>
-                            @Html.EditorFor(model => model.Product.ProductDiameter, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Product.ProductDiameter, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group col-md-2">
-                        @Html.LabelFor(model => model.Product.ProductWeight, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div>
-                            @Html.EditorFor(model => model.Product.ProductWeight, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Product.ProductWeight, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group col-md-2">
-                        @Html.LabelFor(model => model.Product.Line, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div>
-                            @Html.DropDownListFor(x => x.Product.LineId, Model.Lines.Select(p => new SelectListItem { Value = p.LineId.ToString(), Text = p.LineDescription }), new { @class = "btn btn-secondary dropdown-toggle" })
-                            @Html.ValidationMessageFor(model => model.Product.LineId, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-10">
-                        @Html.LabelFor(model => model.Product.ProductMainIcon, htmlAttributes: new { @class = "control-label col-md-6" })
-                        <div>
-                            @Html.EditorFor(model => model.Product.ProductMainIcon, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Product.ProductMainIcon, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group col-md-2">
-                        @Html.LabelFor(model => model.Product.ProductMicrowave, htmlAttributes: new { @class = "control-label col-md-1" })
-                        <div>
-                            <div class="checkbox">
-                                @Html.EditorFor(model => model.Product.ProductMicrowave)
-                                @Html.ValidationMessageFor(model => model.Product.ProductMicrowave, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
+            </div>
         </div>
         <div class="col-5">
-            <form>
-                <div class="form-row">
-                    <div class="form-group col-md-5">
-                        <div class="card">
-                            <div class="card-header-management">
-                                Colores
-                            </div>
-                            <ul class="list-group list-group-flush pre-scrollable">
-                                @foreach (var item in Model.Colors)
-                                {
-                                    <li class="list-group-item">
-                                        <div class="d-inline-block">@Html.DisplayFor(modelItem => item.ColorDescription)</div>
-                                        <div class="float-right d-inline-block">
-                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                        </div>
-                                    </li>
-                                }
-                            </ul>
+            <div class="form-row">
+                <div class="form-group col-md-5">
+                    <div class="card">
+                        <div class="card-header-management">
+                            Colores
                         </div>
-                    </div>
-                    <div class="form-group col-md-7">
-                        <div class="card">
-                            <div class="card-header-management">
-                                Piezas
-                            </div>
-                            <ul class="list-group list-group-flush pre-scrollable">
-                                @foreach (var item in Model.Parts)
-                                {
-                                    <li class="list-group-item">
-                                        <div class="d-inline-block">@Html.DisplayFor(modelItem => item.PartDescription)</div>
-                                        <div class="float-right d-inline-block">
-                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                        </div>
-                                    </li>
-                                }
-                            </ul>
-                        </div>
+                        <ul class="list-group list-group-flush pre-scrollable">
+                            @foreach (var item in Model.Colors)
+                            {
+                                <li class="list-group-item">
+                                    <div class="d-inline-block">@Html.DisplayFor(modelItem => item.ColorDescription)</div>
+                                    <div class="float-right d-inline-block">
+                                        <input class="form-check-input" type="checkbox" name="Colors" value="@item.ColorId" id="defaultCheck1">
+                                    </div>
+                                </li>
+                            }
+                        </ul>
                     </div>
                 </div>
-            </form>
+                <div class="form-group col-md-7">
+                    <div class="card">
+                        <div class="card-header-management">
+                            Piezas
+                        </div>
+                        <ul class="list-group list-group-flush pre-scrollable">
+                            @foreach (var item in Model.Parts)
+                            {
+                                <li class="list-group-item">
+                                    <div class="d-inline-block">@Html.DisplayFor(modelItem => item.PartDescription)</div>
+                                    <div class="float-right d-inline-block">
+                                        <input class="form-check-input" type="checkbox" name="Parts" value="@item.PartId" id="defaultCheck1">
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-md-12">
-            <form>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <div class="card">
-                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="headingOne">
-                                        <h4 class="panel-title">
-                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseObservations" aria-expanded="true" aria-controls="collapseObservations">
-                                                Observaciones
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapseObservations" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                                        <div class="panel-body">
-                                            <table class="table table-hover">
-                                                @foreach (var item in Model.Observations)
-                                                {
-                                                    <tr>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.ObservationDescription)
-                                                        </td>
-                                                        <td class="text-right" style="padding-right: 20px;">
-                                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                        </td>
-                                                    </tr>
-                                                }
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <div class="card">
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingOne">
+                                    <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseObservations" aria-expanded="true" aria-controls="collapseObservations">
+                                            Observaciones
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseObservations" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="panel-body">
+                                        <table class="table table-hover">
+                                            @foreach (var item in Model.Observations)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.ObservationDescription)
+                                                    </td>
+                                                    <td class="text-right" style="padding-right: 20px;">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                    </td>
+                                                </tr>
+                                            }
 
-                                            </table>
-                                        </div>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
         <div class="col-md-12">
-            <form>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <div class="card">
-                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="headingOne">
-                                        <h4 class="panel-title">
-                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFullDescription" aria-expanded="true" aria-controls="collapseFullDescription">
-                                                Descripciones completas
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapseFullDescription" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                                        <div class="panel-body">
-                                            <table class="table table-hover">
-                                                @foreach (var item in Model.FullDescriptions)
-                                                {
-                                                    <tr>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.FullTextDescription)
-                                                        </td>
-                                                        <td class="text-right" style="padding-right: 20px;">
-                                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                        </td>
-                                                    </tr>
-                                                }
-                                            </table>
-                                        </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <div class="card">
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingOne">
+                                    <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFullDescription" aria-expanded="true" aria-controls="collapseFullDescription">
+                                            Descripciones completas
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseFullDescription" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="panel-body">
+                                        <table class="table table-hover">
+                                            @foreach (var item in Model.FullDescriptions)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.FullTextDescription)
+                                                    </td>
+                                                    <td class="text-right" style="padding-right: 20px;">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
         <div class="col-md-12">
-            <form>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <div class="card">
-                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="headingOne">
-                                        <h4 class="panel-title">
-                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseRecommendation" aria-expanded="true" aria-controls="collapseRecommendation">
-                                                Recomendaciones
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapseRecommendation" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                                        <div class="panel-body">
-                                            <table class="table table-hover">
-                                                @foreach (var item in Model.Recommendations)
-                                                {
-                                                    <tr>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.RecommendationDescription)
-                                                        </td>
-                                                        <td class="text-right" style="padding-right: 20px;">
-                                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                        </td>
-                                                    </tr>
-                                                }
-                                            </table>
-                                        </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <div class="card">
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingOne">
+                                    <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseRecommendation" aria-expanded="true" aria-controls="collapseRecommendation">
+                                            Recomendaciones
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseRecommendation" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="panel-body">
+                                        <table class="table table-hover">
+                                            @foreach (var item in Model.Recommendations)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.RecommendationDescription)
+                                                    </td>
+                                                    <td class="text-right" style="padding-right: 20px;">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
         <div class="col-md-12">
-            <form>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <div class="card">
-                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="headingOne">
-                                        <h4 class="panel-title">
-                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                Descripciones cortas
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                                        <div class="panel-body">
-                                            <table class="table table-hover">
-                                                @foreach (var item in Model.ShortDescriptions)
-                                                {
-                                                    <tr>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.ShortTextDescription)
-                                                        </td>
-                                                        <td class="text-right" style="padding-right: 20px;">
-                                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                        </td>
-                                                    </tr>
-                                                }
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <div class="card">
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingOne">
+                                    <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            Descripciones cortas
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="panel-body">
+                                        <table class="table table-hover">
+                                            @foreach (var item in Model.ShortDescriptions)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.ShortTextDescription)
+                                                    </td>
+                                                    <td class="text-right" style="padding-right: 20px;">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                    </td>
+                                                </tr>
+                                            }
 
-                                            </table>
-                                        </div>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
         </div>
-        }
+    </div>
+}
 
 
-        <div>
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
